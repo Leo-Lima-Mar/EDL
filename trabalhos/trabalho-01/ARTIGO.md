@@ -4,7 +4,7 @@
 ### Introdução
 
 O PHP (**P**HP: **H**ypertext **P**reprocessor) é uma linguagem interpretada e livre (gratuita/de código aberto), 
-amplamente utilizada (ocupando o __3º lugar__ no ranking de 2015 da [RedMonk](http://redmonk.com/sogrady/2015/01/14/language-rankings-1-15/)), sendo 
+amplamente utilizada (ocupando o **3º lugar** no ranking de 2015 da [RedMonk](http://redmonk.com/sogrady/2015/01/14/language-rankings-1-15/)), sendo 
 mais adequada para o desenvolvimento web (1 a cada 3 websites a utilizam, segundo a [Netcraft](http://php.net/usage.php)).
 Poderosa e de fácil aprendizado, seu código é mesclado com HTML, o que aumenta drasticamente a sua praticidade.
 
@@ -38,14 +38,81 @@ A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para 
 
 ### Avaliação Comparativa
 PHP tem uma sintaxe básica parecida com C++, mas com foco no desenvolvimento web. 
-<código PHP/C++>
+
+##### Fatorial em PHP:
+
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    </head>
+	    <body>
+	        <h1>
+	          <?php
+	          
+	            function fatorial($n){
+	                if ($n==0 || $n==1)
+	                    return 1;
+	                else
+	                    return $n * fatorial($n-1);
+	            }
+	          
+	            echo "Digite seu nome: " . $_GET["nome"];
+	            echo "Digite o Numero que voce quer saber o fatorial (n <= 20): " . $_GET["n"];
+	            $n = intval($n)
+	            
+	            if ($n>20)
+	                echo "n deve ser menor ou igual a 20!";
+	            else{
+	                $resultado = fatorial($n);
+	                print $nome . ", o fatorial de " . $n . " eh " . $resultado;
+	            }
+	          ?>
+	        </h1>
+	    </body>
+	</html>
+
+#### Fatorial em C++
+	#include <iostream>
+	#include <stdio.h>
+	using namespace std;
+	
+	int fatorial(int n);
+	
+	int main() {
+		string nome;
+		unsigned int n;
+	    unsigned long long resultado;
+	
+	    cout << "Digite seu nome: ";
+	    cin >> nome;
+	    cout << "Digite o Numero que voce quer saber o fatorial (n <= 20): ";
+	    cin >> n;
+	    if (n>20)
+	        cout << "n deve ser menor ou igual a 20!" << endl;
+	    else{
+	        resultado = fatorial(n);
+	        cout << nome << ", o fatorial de " << n << " eh " << resultado << "." << endl;
+	    }
+	    
+		return 0;
+	}
+	
+	int fatorial(int n){
+	    if (n==0 || n==1)
+	        return 1;
+	    else
+	        return n * fatorial(n-1);
+	}
+
 Conforme pode ser visto, ambas são muito parecidas, onde a maior diferença fica por conta da tipagem e na entrada/saída de dados.
 
 - Readability
-Quanto a readability, C++ ganha devido à tipagem estática, onde o tipo de conteúdo é bem controlado e fácil de ser reconhecido, mas perde por não ter o '$' anterior ao nome das variáveis, o que as torna de identificação imediata. PHP Ganha na entrada/saída de dados.
+
+Quanto a readability, C++ ganha devido à tipagem estática, onde o tipo de conteúdo é bem controlado e fácil de ser reconhecido, mas perde por não ter o '$' anterior ao nome das variáveis, o que as torna de identificação imediata. Apesar de diferentes, ambas tem praticamente a mesma readbility na entrada/saída de dados.
 
 - Writeability
-  Analisando a writeability, PHP ganha pela tipagem dinâmica, onde a digitação de muitos caracteres é economizada já que não é preciso definir tipos para as variáveis. Por outro lado, pode ser exaustivo ter que escrever "$" o tempo inteiro. Aqui, PHP também ganha na hora de escrever o código de entrada/saída de dados.
+
+  Analisando a writeability, PHP ganha pela tipagem dinâmica, onde a digitação de muitos caracteres é economizada já que não é preciso definir tipos para as variáveis. Por outro lado, pode ser exaustivo ter que escrever "$" o tempo inteiro. Aqui, a entrada e saída de dados também é de writeablity equivalente em ambas.
 
 - Expressividade:
   Ambas são linguagens expressivas e, por não terem muitas diferenças sintáticas, vem do programador considerar uma mais expressiva do que a outra. Eu, particularmente, considero PHP mais expressiva, por poder ser mesclada com HTML e ter uma sintaxe alternativa à das chaves (ex: endif, endwhile).
