@@ -44,35 +44,25 @@ PHP tem uma sintaxe básica parecida com C++.
 
 ##### Fatorial em PHP:
 
-	<!DOCTYPE html>
-	<html>
-	    <head>
-	    </head>
-	    <body>
-	        <h1>
-	          <?php
-	          
-	            function fatorial($n){
-	                if ($n==0 || $n==1)
-	                    return 1;
-	                else
-	                    return $n * fatorial($n-1);
-	            }
-	          
-	            echo "Digite seu nome: " . $_GET["nome"];
-	            echo "Digite o Numero que voce quer saber o fatorial (n <= 20): " . $_GET["n"];
-	            $n = intval($n)
-	            
-	            if ($n>20)
-	                echo "n deve ser menor ou igual a 20!";
-	            else{
-	                $resultado = fatorial($n);
-	                print $nome . ", o fatorial de " . $n . " eh " . $resultado;
-	            }
-	          ?>
-	        </h1>
-	    </body>
-	</html>
+          <?php
+            function fatorial($n){
+                if ($n==0 || $n==1)
+                    return 1;
+                else
+                    return $n * fatorial($n-1);
+            }
+          
+            echo "Digite seu nome: " . $_GET["nome"];
+            echo "Digite o Numero que voce quer saber o fatorial (n <= 20): " . $_GET["n"];
+            $n = intval($n)
+            
+            if ($n>20)
+                echo "n deve ser menor ou igual a 20!";
+            else{
+                $resultado = fatorial($n);
+                print $nome . ", o fatorial de " . $n . " eh " . $resultado;
+            }
+          ?>
 
 ##### Fatorial em C++
 	#include <iostream>
@@ -115,7 +105,7 @@ Quanto a readability, C++ ganha devido à tipagem estática, onde o tipo de cont
 
 ##### Writeability:
 
-  Analisando a writeability, PHP ganha pela tipagem dinâmica, onde a digitação de muitos caracteres é economizada já que não é preciso definir tipos para as variáveis. Por outro lado, pode ser exaustivo ter que escrever "$" o tempo inteiro. Aqui, a entrada e saída de dados também é de writeablity equivalente em ambas.
+  Analisando a writeability, é óbvio que o PHP é bem mais direto, necessitando de menos linhas de código. Ganha também pela tipagem dinâmica, onde a digitação de muitos caracteres é economizada já que não é preciso definir tipos para as variáveis. Por outro lado, pode ser exaustivo ter que escrever "$" o tempo inteiro. Aqui, a entrada e saída de dados também é de writeablity equivalente em ambas.
 
 ##### Expressividade:
   Ambas são linguagens expressivas e, por não terem muitas diferenças sintáticas, vem do programador considerar uma mais expressiva do que a outra. Eu, particularmente, considero PHP mais expressiva, por poder ser mesclada com HTML e ter uma sintaxe alternativa à das chaves (ex: endif, endwhile).
