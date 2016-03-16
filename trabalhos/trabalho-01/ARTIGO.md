@@ -40,7 +40,7 @@ A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para 
 
 
 ## Avaliação Comparativa
-PHP tem uma sintaxe básica parecida com C++, mas com foco no desenvolvimento web. 
+PHP tem uma sintaxe básica parecida com C++.
 
 ##### Fatorial em PHP:
 
