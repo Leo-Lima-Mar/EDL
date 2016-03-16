@@ -1,5 +1,5 @@
 
-# PHP - EM PRODUÇÃO
+# PHP
 
 ## Introdução
 
