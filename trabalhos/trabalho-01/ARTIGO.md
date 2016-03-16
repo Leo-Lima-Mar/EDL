@@ -1,7 +1,7 @@
 
 # PHP - EM PRODUÇÃO
 
-### Introdução
+## Introdução
 
 O PHP (**P**HP: **H**ypertext **P**reprocessor) é uma linguagem interpretada e livre (gratuita/de código aberto), 
 amplamente utilizada (ocupando o **3º lugar** no ranking de 2015 da [RedMonk](http://redmonk.com/sogrady/2015/01/14/language-rankings-1-15/)), sendo 
@@ -10,7 +10,7 @@ Poderosa e de fácil aprendizado, seu código é mesclado com HTML, o que aument
 
 O código PHP é executado no servidor, não tendo o conhecimento do que acontece no cliente (navegador), exceto por meio solicitações deste. Sendo assim, o PHP é mais recomendado quando a geração de HTML ou a utilização de banco de dados são práticas frequentes para o website.
 
-### Origens e Influências
+## Origens e Influências
 
 A linguagem PHP foi criada por Rasmus Lerdorf com o nome de **P**ersonal **H**ome **P**age Tools em 1994, tendo seu código fonte liberado em 1995. Seu objetivo inicial era ser um pacote de programas para a geração de imagens com a finalidade de substituir scripts Perl utilizados por seu autor na criação de sua página pessoal.
 
@@ -20,7 +20,7 @@ A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para 
 
 ### Classificação
 
-- Interpretada
+- Interpretada:
 	- Durante a execução, um código intermediário é gerado, para em seguida ser transformado em código de máquina.
 	
 - Paradigmas: 
@@ -29,17 +29,17 @@ A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para 
 	- Funcional
 	- Orientada a Objetos
 
-- Facilmente Portável
+- Facilmente Portável:
 	- Pode ser utilizada nos mais diversos sistemas operacionais.
-	- 
-- Inferência de tipo e tipagem fraca
+	
+- Inferência de tipo e tipagem fraca:
 	- Os tipos das variáveis não precisam ser declarados e podem mudar ao longo da execução.
-	- 
-- Open-source
+	
+- Open-source:
 	- O código-fonte da linguagem está disponível na internet e qualquer um pode colaborar com seu desenvolvimento.
 
 
-### Avaliação Comparativa
+## Avaliação Comparativa
 PHP tem uma sintaxe básica parecida com C++, mas com foco no desenvolvimento web. 
 
 ##### Fatorial em PHP:
@@ -120,7 +120,7 @@ Quanto a readability, C++ ganha devido à tipagem estática, onde o tipo de cont
 ##### Expressividade:
   Ambas são linguagens expressivas e, por não terem muitas diferenças sintáticas, vem do programador considerar uma mais expressiva do que a outra. Eu, particularmente, considero PHP mais expressiva, por poder ser mesclada com HTML e ter uma sintaxe alternativa à das chaves (ex: endif, endwhile).
 
-### Conclusão
+## Conclusão
 
 Apesar de não ser uma linguagem muito antiga, também não é nova, e os fatos de ser open-source e de ser largamente utilizada fez com que se tornasse rapidamente
 madura.
