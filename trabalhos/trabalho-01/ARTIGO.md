@@ -132,4 +132,7 @@ corrigir.
 Portanto, o aprendizado rápido, a fácil integração com a maioria dos bancos de dados atuais e a utilização absolutamente gratuita fazem com que o PHP seja, 
 sem dúvidas, uma das melhores alternativas para o desenvolvimento web. O grande número de desenvolvedores PHP que existem só confirma essa afirmação.
 
-
+## Bibliografia
+* Site da linguagem: http://php.net
+* Wikipedia: https://pt.wikipedia.org/wiki/PHP
+* Tableless: http://tableless.com.br/10-novidades-do-php-7/
