@@ -18,7 +18,7 @@ Em 1997 foi lançada a segunda versão da linguagem, chamada de PHP/FI, pois tra
 A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para a versão 6 já estavam implementadas na versão 5.6 (com destaque para o suporte nativo ao Unicode), sem grandes mudanças. O PHP 7 teve sua versão de testes lançada em junho de 2015. As principais mudanças são a grande melhora no desempenho e a implementação do tratamento de exceções.
 
 
-### Classificação
+## Classificação
 
 - Interpretada:
 	- Durante a execução, um código intermediário é gerado, para em seguida ser transformado em código de máquina.
@@ -109,11 +109,11 @@ PHP tem uma sintaxe básica parecida com C++, mas com foco no desenvolvimento we
 
 Conforme pode ser visto, ambas são muito parecidas, onde a maior diferença fica por conta da tipagem e na entrada/saída de dados.
 
-##### Readability
+##### Readability:
 
 Quanto a readability, C++ ganha devido à tipagem estática, onde o tipo de conteúdo é bem controlado e fácil de ser reconhecido, mas perde por não ter o '$' anterior ao nome das variáveis, o que as torna de identificação imediata. Apesar de diferentes, ambas tem praticamente a mesma readbility na entrada/saída de dados.
 
-##### Writeability
+##### Writeability:
 
   Analisando a writeability, PHP ganha pela tipagem dinâmica, onde a digitação de muitos caracteres é economizada já que não é preciso definir tipos para as variáveis. Por outro lado, pode ser exaustivo ter que escrever "$" o tempo inteiro. Aqui, a entrada e saída de dados também é de writeablity equivalente em ambas.
 
