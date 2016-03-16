@@ -22,6 +22,7 @@ A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para 
 
 - Interpretada
 	- Durante a execução, um código intermediário é gerado, para em seguida ser transformado em código de máquina.
+	
 - Paradigmas: 
 	- Procedural
 	- Reflexiva
@@ -30,8 +31,10 @@ A versão oficial seguinte à da 5 foi a 7, pois funcionalidades esperadas para 
 
 - Facilmente Portável
 	- Pode ser utilizada nos mais diversos sistemas operacionais.
+	- 
 - Inferência de tipo e tipagem fraca
 	- Os tipos das variáveis não precisam ser declarados e podem mudar ao longo da execução.
+	- 
 - Open-source
 	- O código-fonte da linguagem está disponível na internet e qualquer um pode colaborar com seu desenvolvimento.
 
@@ -71,7 +74,7 @@ PHP tem uma sintaxe básica parecida com C++, mas com foco no desenvolvimento we
 	    </body>
 	</html>
 
-#### Fatorial em C++
+##### Fatorial em C++
 	#include <iostream>
 	#include <stdio.h>
 	using namespace std;
@@ -106,18 +109,16 @@ PHP tem uma sintaxe básica parecida com C++, mas com foco no desenvolvimento we
 
 Conforme pode ser visto, ambas são muito parecidas, onde a maior diferença fica por conta da tipagem e na entrada/saída de dados.
 
-- Readability
+##### Readability
 
 Quanto a readability, C++ ganha devido à tipagem estática, onde o tipo de conteúdo é bem controlado e fácil de ser reconhecido, mas perde por não ter o '$' anterior ao nome das variáveis, o que as torna de identificação imediata. Apesar de diferentes, ambas tem praticamente a mesma readbility na entrada/saída de dados.
 
-- Writeability
+##### Writeability
 
   Analisando a writeability, PHP ganha pela tipagem dinâmica, onde a digitação de muitos caracteres é economizada já que não é preciso definir tipos para as variáveis. Por outro lado, pode ser exaustivo ter que escrever "$" o tempo inteiro. Aqui, a entrada e saída de dados também é de writeablity equivalente em ambas.
 
-- Expressividade:
+##### Expressividade:
   Ambas são linguagens expressivas e, por não terem muitas diferenças sintáticas, vem do programador considerar uma mais expressiva do que a outra. Eu, particularmente, considero PHP mais expressiva, por poder ser mesclada com HTML e ter uma sintaxe alternativa à das chaves (ex: endif, endwhile).
-
-Por ser interpretada, no geral PHP é mais lenta. 
 
 ### Conclusão
 
