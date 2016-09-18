@@ -15,38 +15,72 @@ local VELOCIDADE_INICIAL = 7
 local gameOver = false
 
 local recorde = 0
+-- Nome: palavra reservada "local"
+-- Propriedade: definição de escopo
+-- Binding time: design da linguagem
+-- Explicação: Durante o design da linguagem, decidiu-se que
+-- variáveis seriam globais por padrão, e essa palavra reservada
+-- define o escopo da variável como local.
 
 
 function gerarAlturaInicial()
 	-- Funciona como operador ternário: (posicao == 1) ? ALTURA_2 : ALTURA 1	
 	return math.random(0,1) == 1 and ALTURA_2 or ALTURA_1
+	-- Nome: função "math.random()"
+	-- Propriedade: implementação
+	-- Binding time: compilação
+	-- Explicação: Durante o tempo de compilação (ou de linkagem, sendo mais específico) é
+	-- recuperada a implementação dessa função.
 end
+-- Nome: palavra reservada "end"
+-- Propriedade: definição de bloco
+-- Binding time: design da linguagem
+-- Explicação: Durante o design da linguagem, decidiu-se que
+-- blocos de código seriam finalizados por esse palavra reservada.
+
 
 
 function gerarCarrinhoAdversario()
 	
 	local velocidade = VELOCIDADE_INICIAL
-    local x = X_INICIAL_ADVERSARIO
-    local y = gerarAlturaInicial()
+	-- Nome: variável "velocidade"
+	-- Propriedade: valor
+	-- Binding time: execução
+	-- Explicação: O valor que será guardado por essa variável
+	-- só é obtido em tempo de execução.
+	local x = X_INICIAL_ADVERSARIO
+	-- Nome: variável "x"
+	-- Propriedade: endereço
+	-- Binding time: execução
+	-- Explicação: Por ser uma variável local, 
+	-- seu endereço só é determinado em tempo de execução.
+	local y = gerarAlturaInicial()
     
-    return
-        function ()
-            x = x - velocidade
-            if x < 0 then 
-			    x = X_INICIAL_ADVERSARIO
-			    y = gerarAlturaInicial()
-			    velocidade = velocidade + 0.5
-            end
+	return
+		function ()
+			x = x - velocidade
+			-- Nome: caracter "-"
+			-- Propriedade: semântica
+			-- Binding time: compilação
+			-- Explicação: Dependendo do tipo dos operandos (integer ou float), 
+			-- a instrução de subtração é feita de forma diferente, e é no
+			-- compile time que essa forma é definida.
 
-            return x, y
-        end
+			if x < 0 then 
+				x = X_INICIAL_ADVERSARIO
+				y = gerarAlturaInicial()
+				velocidade = velocidade + 0.5
+			end
+
+			return x, y
+		end
 end
 
 
 function verificarColisao(meuCar, carAdv)
-  return meuCar.x < carAdv.x + LARGURA_CARRINHO and --27 < x+98  
-         carAdv.x < meuCar.x + LARGURA_CARRINHO and -- x < 100
-         meuCar.y == carAdv.y
+	return meuCar.x < carAdv.x + LARGURA_CARRINHO and
+			carAdv.x < meuCar.x + LARGURA_CARRINHO and
+			meuCar.y == carAdv.y
 end
 
 function love.load()
