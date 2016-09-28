@@ -26,17 +26,17 @@ local recorde = 0
 function gerarAlturaInicial()
 	-- Funciona como operador ternário: (posicao == 1) ? ALTURA_2 : ALTURA 1	
 	return math.random(0,1) == 1 and ALTURA_2 or ALTURA_1
-	-- Nome: função "math.random()"
+	-- Nome: função "random" da biblioteca math
 	-- Propriedade: implementação
 	-- Binding time: compilação
 	-- Explicação: Durante o tempo de compilação (ou de linkagem, sendo mais específico) é
 	-- recuperada a implementação dessa função.
 end
 -- Nome: palavra reservada "end"
--- Propriedade: definição de bloco
+-- Propriedade: semântica
 -- Binding time: design da linguagem
 -- Explicação: Durante o design da linguagem, decidiu-se que
--- blocos de código seriam finalizados por esse palavra reservada.
+-- blocos de código seriam finalizados por essa alavra reservada.
 
 
 
