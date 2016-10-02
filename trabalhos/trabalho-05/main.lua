@@ -12,18 +12,21 @@ local ALTURA_2 = 252
 local ALTURA_CARRINHO = 73
 local LARGURA_CARRINHO = 98
 
+local LARGURA_QUADRADO = 23
+
 local VELOCIDADE_INICIAL = 7
 local ACELERACAO = 0.3
 
 local gameOver = false
 
 local QUANTIDADE_ADVERSARIOS = 2
+local qtdQuadrados = 0
 
 local recorde = 0
 local pontuacao = 0
 
  function carregaRecordeDoArquivo()
- 	--Retorna o valor de record. 
+ 	--Retorna o valor do recorde. 
  	--Caso o arquivo seja aberto corretamente e o valor que tenha nele seja um inteiro, retornamos o valor.
  	--Caso contrário, retorna-se 0.
     local f = io.open('recorde.txt', "r")
@@ -31,8 +34,8 @@ local pontuacao = 0
     local arquivoExiste = f 
     --no lua, quando uma função falha, retorna nil em seu primeiro parâmentro 
     --(veja https://groups.google.com/forum/#!topic/lua-br/FbteIfNHdF8)
-    --Em suma, quando não conseguimos ler o arquivo, o record continua com 0 (seu valor default)
-    --Na hora de gravar a variável record no arquivo um arquivo já é criado automaticamente.
+    --Em suma, quando não conseguimos ler o arquivo, o recorde continua com 0 (seu valor default)
+    --Na hora de gravar a variável recorde no arquivo um arquivo já é criado automaticamente.
 
     if (arquivoExiste) then
     	recorde = tonumber(f:read("*all")) --pega o único valor presente no arquivo, o recorde
@@ -42,7 +45,7 @@ local pontuacao = 0
  end
 
 function gravaRecordeNoArquivo()
-	--grava a variável record no arquivo para que, quando o jogo for reaberto, o valor seja carregado.
+	--grava a variável recorde no arquivo para que, quando o jogo for reaberto, o valor seja carregado.
 	--note que o arquivo será criado caso ele não exista
 	local f = assert(io.open('recorde.txt','w'))
 	f:write(recorde)
@@ -58,8 +61,12 @@ function gerarAlturaInicial()
 	-- Funciona como operador ternário: (posicao == 1) ? ALTURA_2 : ALTURA 1	
 end
 
-function gerarCarrinhoAdversario(xinicial)
-	local x = xinicial; 
+function gerarAlturaInicialQuadrado()
+	return 377 + math.random(0,5) * 25
+end
+
+function gerarCarrinhoAdversario(xInicial)
+	local x = xInicial; 
 	local y = gerarAlturaInicial()
 	velocidade = VELOCIDADE_INICIAL --reinicia a velocidade. Isso acontece toda a vez que o jogo começa ou quando o jogo reinicia
     
@@ -79,6 +86,16 @@ function gerarCarrinhoAdversario(xinicial)
 		end, x, y
 end
 
+function gerarQuadrado()
+	local x = 955
+	local y = gerarAlturaInicialQuadrado()
+
+   	return 
+		function ()
+			x = x - velocidade
+			return x, y
+		end
+end
 
 function verificarColisao(meuCar, carAdv)
 	return meuCar.x < carAdv.x + LARGURA_CARRINHO and
@@ -88,7 +105,7 @@ end
 
 function love.load()
 
-	-- Ler record gravado no arquivo
+	-- Ler recorde gravado no arquivo
 	carregaRecordeDoArquivo()
 
 	--- Define o tamanho da fonte usada
@@ -96,17 +113,21 @@ function love.load()
 
 	-- Carrega imagens
 	carrinhoPlayerImg = love.graphics.newImage("/Imagens/CarrinhoFundoTransparenteDir98x73.png")
-	carrinhoAdversarioImg = love.graphics.newImage("/Imagens/CarrinhoFundoTransparenteEsq98x73.png")
+	quadradoImg = love.graphics.newImage("/Imagens/QuadradoPreto23x23.png")
 	explosaoImg = love.graphics.newImage("/Imagens/ExplosaoPequena.png")
 	pistaImg = love.graphics.newImage("/Imagens/Pista1000x500.png")
 
 	-- Ajusta a janela
 	love.window.setMode(LARGURA_JANELA, ALTURA_JANELA)
 	love.window.setTitle("Carrinho - 9999 Games")
-	love.window.setIcon(love.image.newImageData("/Imagens/QuadradoPreto1x1.png"))
+	love.window.setIcon(love.image.newImageData("/Imagens/QuadradoPreto45x45.png"))
 
 	--- Inicia o contador de tempo
 	tempoInicio = os.clock()
+
+	-- TRABALHO 5: O escopo do array de quadrados é local a este arquivo.
+	-- TRABALHO 5: Aloca a coleção dinâmica de quadrados:
+	quadrados = {}
 
 	-- Cria o carrinho do jogador
 	carrinhoPlayer = {}
@@ -114,7 +135,7 @@ function love.load()
 	carrinhoPlayer.y = ALTURA_1
 
 	--cria o array de adversarios
-	Adversarios = {};
+	Adversarios = {}
 
 	-- Cria os carrinhos dos adversários	
 	for i=1,QUANTIDADE_ADVERSARIOS do
@@ -154,6 +175,27 @@ function love.update(dt)
 			Adversarios[i].x, Adversarios[i].y = Adversarios[i].gerar()
 		end
 
+		
+		if (math.random(50) == 1) then
+			qtdQuadrados = qtdQuadrados + 1
+			-- TRABALHO 5: Aloca espaço na coleção dinâmica para receber mais um quadrado.
+			-- Esse quadrado "sobrevive" até sair da tela completamente.
+			quadrados[qtdQuadrados] = {}
+			quadrados[qtdQuadrados].atualizarPosicao = gerarQuadrado()
+		end
+
+		-- atualiza a posição dos quadrados
+		for i=1, qtdQuadrados do
+			quadrados[i].x, quadrados[i].y = quadrados[i].atualizarPosicao()
+			if (quadrados[i].x < -LARGURA_QUADRADO) then
+				-- TRABALHO 5: Retira da coleção dinâmica o quadrado que saiu completamente da tela. 
+				-- Essa função deve desalocar o objeto removido.
+				table.remove(quadrados, i)
+				qtdQuadrados = qtdQuadrados - 1
+				break
+			end
+		end
+
 		-- Calcula tempo decorrido
 		tempoDecorrido = os.clock() - tempoInicio
 
@@ -164,13 +206,15 @@ function love.update(dt)
 
 	else
 		-- Possibilita reiniciar o jogo
-		if love.keyboard.isDown("return") then -- return ==ger enter
+		if love.keyboard.isDown("return") then -- return == enter
 			tempoInicio = os.clock()
 			gameOver = false
 			pontuacao = 0
+			quadrados = {}
+			qtdQuadrados = 0
 
 			for i=1,QUANTIDADE_ADVERSARIOS do
-				Adversarios[i].gerar = gerarCarrinhoAdversario( (LARGURA_JANELA ) + (LARGURA_JANELA/QUANTIDADE_ADVERSARIOS)*(i-1)  )
+				Adversarios[i].gerar, Adversarios[i].x, Adversarios[i].y = gerarCarrinhoAdversario( (LARGURA_JANELA ) + (LARGURA_JANELA/QUANTIDADE_ADVERSARIOS)*(i-1)  )
 			end
 		end
 	end
@@ -199,7 +243,11 @@ function love.draw()
 
 		--desenha o carrinho dos adversários
 		for i=1,QUANTIDADE_ADVERSARIOS do
-			love.graphics.draw(carrinhoAdversarioImg, Adversarios[i].x, Adversarios[i].y)
+			love.graphics.draw(carrinhoPlayerImg, Adversarios[i].x, Adversarios[i].y)
+		end
+
+		for i=1, qtdQuadrados do
+			love.graphics.draw(quadradoImg, quadrados[i].x, quadrados[i].y)
 		end
 
 	-- Exibe explosao, tempo total de jogo, pontuação e mensagem de reinício
