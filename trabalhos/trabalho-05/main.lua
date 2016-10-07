@@ -1,11 +1,25 @@
+--[[
+	TRABALHO 5
+
+	O array "quadrados" guarda a coleção dinâmica de objetos pedida neste trabalho.
+	Por enquanto, os quadrados não possuem função útil no jogo.
+
+	O escopo desse array (e de seus objetos, por consequência) é local a este arquivo.
+	Já seu tempo de vida será o mesmo do programa, sendo alocado na inicialização e desalocado
+	no encerramento deste.
+
+	Por outro lado, seus objetos são criados dinâmica e aleatóriamente durante a execução da 
+	função love.update, sendo removidos/desalocados na mesma ao colidirem entre si ou ao saírem 
+	da tela. 
+
+]]
+
 local LARGURA_JANELA = 1000
 local ALTURA_JANELA = 500
 
 local X_INICIAL_ADVERSARIO = 902
 local X_PLAYER = 27
 
---Um inimigo pode estar somente em duas posições em y. 
---As duas variáveis abaixo somente definem essas duas posições.
 local ALTURA_1 = 177 
 local ALTURA_2 = 252
 
@@ -125,8 +139,6 @@ function love.load()
 	--- Inicia o contador de tempo
 	tempoInicio = os.clock()
 
-	-- TRABALHO 5: O escopo do array de quadrados é local a este arquivo.
-	-- TRABALHO 5: Aloca a coleção dinâmica de quadrados:
 	quadrados = {}
 
 	-- Cria o carrinho do jogador
@@ -178,8 +190,6 @@ function love.update(dt)
 		
 		if (math.random(50) == 1) then
 			qtdQuadrados = qtdQuadrados + 1
-			-- TRABALHO 5: Aloca espaço na coleção dinâmica para receber mais um quadrado.
-			-- Esse quadrado "sobrevive" até sair da tela completamente.
 			quadrados[qtdQuadrados] = {}
 			quadrados[qtdQuadrados].atualizarPosicao = gerarQuadrado()
 		end
@@ -188,8 +198,6 @@ function love.update(dt)
 		for i=1, qtdQuadrados do
 			quadrados[i].x, quadrados[i].y = quadrados[i].atualizarPosicao()
 			if (quadrados[i].x < -LARGURA_QUADRADO) then
-				-- TRABALHO 5: Retira da coleção dinâmica o quadrado que saiu completamente da tela. 
-				-- Essa função deve desalocar o objeto removido.
 				table.remove(quadrados, i)
 				qtdQuadrados = qtdQuadrados - 1
 				break
