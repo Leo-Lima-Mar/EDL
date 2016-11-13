@@ -36,6 +36,9 @@ local gameOver = false
 local recorde = 0
 local pontuacao = 0
 
+-- trabalho-07 - coroutine
+local mCor
+
 -- Manipulação de arquivos para gravar o recorde
 function carregaRecordeDoArquivo()
     local f = io.open('recorde.txt', "r")
@@ -129,7 +132,6 @@ function criarQuadrado()
 end
 
 
-
 -- Verificadores de colisão/posição
 function verificarColisaoCarrinho(minhaMoto, carAdv)
 	return minhaMoto.x < carAdv.x + LARGURA_CARRINHO and
@@ -194,7 +196,6 @@ function verificarQuadradosSairamTela()
 end
 
 -- Verificador de comando do usuário
--- trabalho-07 - coroutine
 function verificarInteracaoUsuario()
 	while true do
 		if (love.keyboard.isDown("w") or love.keyboard.isDown("up")) and motoPlayer.y >= Y_MINIMO_MOTO then
@@ -210,17 +211,43 @@ function verificarInteracaoUsuario()
 	end
 end
 
--- trabalho-07 - coroutine
+-- Verificador de comando do usuário
 local movePlayer = coroutine.wrap(verificarInteracaoUsuario)
+
+-- trabalho-07 - coroutine
+function mudarCor()
+	while true do
+		motoPlayerImg = moto_w
+		coroutine.yield()	
+		motoPlayerImg = moto_w
+		coroutine.yield()				
+		motoPlayerImg = moto_r
+		coroutine.yield()
+		motoPlayerImg = moto_r
+		coroutine.yield()			
+		motoPlayerImg = moto_b
+		coroutine.yield()	
+		motoPlayerImg = moto_b
+		coroutine.yield()						
+	end
+end
 
 
 function love.load()
 
 	carregaRecordeDoArquivo()
 
-	love.graphics.setFont(love.graphics.newFont(50))
+	-- trabalho-07 - coroutine
+	mCor = coroutine.wrap(mudarCor);
 
-	motoPlayerImg = love.graphics.newImage("/Imagens/Moto73x23.png")
+	love.graphics.setFont(love.graphics.newFont(50))
+	moto_r = love.graphics.newImage("/Imagens/Moto73x23_r.png")
+	moto_b = love.graphics.newImage("/Imagens/Moto73x23_b.png")
+	moto_w = love.graphics.newImage("/Imagens/Moto73x23_w.png")
+
+	motoPlayerImg = moto_o
+
+	policeLogo = love.graphics.newImage("/Imagens/police.png")
 	carrinhoAdversarioImg = love.graphics.newImage("/Imagens/CarrinhoFundoTransparenteDir98x73.png")
 	quadradoImg = love.graphics.newImage("/Imagens/QuadradoPreto23x23.png")
 	explosaoImg = love.graphics.newImage("/Imagens/ExplosaoPequena.png")
@@ -250,8 +277,6 @@ function love.update(dt)
 	velocidade = velocidade + ACELERACAO * dt
 
 	if not gameOver then
-
-		-- trabalho-07 - coroutine
 		movePlayer()
 
 		verificarColisoesAdversarios()
@@ -296,9 +321,14 @@ function love.draw()
 	love.graphics.draw(pistaImg)
 	love.graphics.print(string.format("Recorde: %d\n", recorde), LARGURA_JANELA-400, 30)
 
+
+	-- trabalho-07 - coroutine
+	mCor();
+
 	if not gameOver then
 
 		love.graphics.draw(motoPlayerImg, motoPlayer.x, motoPlayer.y)
+		love.graphics.draw(policeLogo, 460, 30)
 
 		for i=1,QUANTIDADE_ADVERSARIOS do
 			love.graphics.draw(carrinhoAdversarioImg, Adversarios[i].x, Adversarios[i].y)
