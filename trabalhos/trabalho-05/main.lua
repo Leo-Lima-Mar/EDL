@@ -148,14 +148,16 @@ function criarQuadrado()
 end
 
 function verificarQuadradosSairamTela()
+	local temp = qtdQuadrados;
 	for i=1, qtdQuadrados do
 		quadrados[i].x, quadrados[i].y = quadrados[i].atualizarPosicao()
 		if ((quadrados[i].x < -LARGURA_QUADRADO) or (quadrados[i].x > LARGURA_JANELA)) then
 			table.remove(quadrados, i)
-			qtdQuadrados = qtdQuadrados - 1
+			temp = temp - 1
 			break
 		end
 	end
+	qtdQuadrados = temp;
 end
 
 function verificarColisoesQuadrados()
